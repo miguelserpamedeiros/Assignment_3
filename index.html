@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Make Force Layout</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <script src="network.js"></script>
+    <style>
+      body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+
+            
+        }
+
+        svg {
+            width: 60vw;
+            height: 60vw;
+        }
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: 40%;
+            height: auto;
+            padding: 5px;
+            font: 12px sans-serif;
+            background: rgb(216, 215, 215);
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            
+        }
+        #charge, #collide, #linkStrength {
+            accent-color: rgb(46, 44, 44);
+
+        }
+    </style>
+
+</head>
+<body>
+    <div class="controls">
+        <label for="charge">Force Many Body:</label>
+        <input type="range" id="charge" name="charge" min="-45" max="0" value="-30">
+        <label for="collide"> Force Collide:</label>
+        <input type="range" id="collide" name="collide" min="1" max="50" value="12">
+        <label for="linkStrength">Link Strength:</label>
+        <input type="range" id="linkStrength" name="linkStrength" min="0" max="1" step="0.1" value="0.2">
+    </div>
+    <div class="tooltip" style="opacity:0;"></div>
+<script>
+    d3.json("publication_network.json").then(function (data){
+        let svg = d3.select('body').append("svg").attr("viewBox","0 0 1000 800")
+        console.log(data)
+
+        simulate(data,svg) // main function to make network
+    })
+
+
+
+</script>
+
+</body>
+</html>
